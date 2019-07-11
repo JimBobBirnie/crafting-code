@@ -1,3 +1,4 @@
+using System;
 using Xunit;
 
 
@@ -6,14 +7,13 @@ namespace CraftingCode
     public class StackTests
     {
         [Fact]
-        public void TestName()
+        public void PopShouldThrowWhenNoItems()
         {
             //Given
-
+            var stack = new MyStack();
             //When
-
             //Then
-            Assert.True(true);
+            Assert.Throws<InvalidOperationException>(()=> stack.Pop());
         }
     }
 }
