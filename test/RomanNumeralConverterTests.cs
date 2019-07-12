@@ -51,6 +51,12 @@ namespace CraftingCode
             var actual = RomanNumeralConverter.Convert(romanNumeral);
             Assert.Equal(decimalEquivalent, actual);
         }
+        [Theory]
+        [InlineData("IL")]
+        public void IllegalLowerNumbersThrowException(string romanNumeral)
+        {
+            Assert.Throws<ArgumentException>(() => RomanNumeralConverter.Convert(romanNumeral));
+        }
     }
 
 }
