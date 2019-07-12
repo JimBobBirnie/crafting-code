@@ -27,13 +27,17 @@ namespace CraftingCode
                     isDeductionPair = currentCharacterValue < nextCharacterValue;
                     if (isDeductionPair)
                     {
-                        if (currentCharacterValue == 1 && (nextCharacterValue!= 5 && nextCharacterValue!=10))
+                        if (currentCharacterValue == 1 && (nextCharacterValue != 5 && nextCharacterValue != 10))
                         {
                             throw new ArgumentException("romanNumeral");
                         }
-                        if (currentCharacterValue == 5)
+                        if (currentCharacterValue == 5 || currentCharacterValue == 50 || currentCharacterValue == 500)
                         {
-                            throw new ArgumentException("romanNumeral");                            
+                            throw new ArgumentException("romanNumeral");
+                        }
+                        if (currentCharacterValue == 10 && (nextCharacterValue != 50 && nextCharacterValue != 100))
+                        {
+                              throw new ArgumentException("romanNumeral");
                         }
                         runningTotal += (nextCharacterValue - currentCharacterValue);
                         i++;

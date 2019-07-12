@@ -90,13 +90,6 @@ namespace CraftingCode
         }
 
         [Theory]
-        [InlineData("CD")]
-        public void IllegalLowerNumbersThrowExceptionForC(string romanNumeral)
-        {
-            Assert.Throws<ArgumentException>(() => RomanNumeralConverter.Convert(romanNumeral));
-        }
-
-        [Theory]
         [InlineData("DM")]
         public void DIsAlwaysIllegalLowerNumber(string romanNumeral)
         {
