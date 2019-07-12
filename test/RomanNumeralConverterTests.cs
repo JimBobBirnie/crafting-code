@@ -71,6 +71,14 @@ namespace CraftingCode
         {
             Assert.Throws<ArgumentException>(() => RomanNumeralConverter.Convert(romanNumeral));
         }
+
+        [Theory]
+        [InlineData("XD")]
+        [InlineData("XM")]
+        public void IllegalLowerNumbersThrowExceptionForX(string romanNumeral)
+        {
+            Assert.Throws<ArgumentException>(() => RomanNumeralConverter.Convert(romanNumeral));
+        }
     }
 
 }
