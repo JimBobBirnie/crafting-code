@@ -53,6 +53,9 @@ namespace CraftingCode
         }
         [Theory]
         [InlineData("IL")]
+        [InlineData("IC")]
+        [InlineData("ID")]
+        [InlineData("IM")]
         public void IllegalLowerNumbersThrowException(string romanNumeral)
         {
             Assert.Throws<ArgumentException>(() => RomanNumeralConverter.Convert(romanNumeral));
