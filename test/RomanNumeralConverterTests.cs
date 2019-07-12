@@ -79,6 +79,29 @@ namespace CraftingCode
         {
             Assert.Throws<ArgumentException>(() => RomanNumeralConverter.Convert(romanNumeral));
         }
+
+        [Theory]
+        [InlineData("LC")]
+        [InlineData("LD")]
+        [InlineData("LM")]
+        public void LIsAlwaysIllegalLowerNumber(string romanNumeral)
+        {
+            Assert.Throws<ArgumentException>(() => RomanNumeralConverter.Convert(romanNumeral));
+        }
+
+        [Theory]
+        [InlineData("CD")]
+        public void IllegalLowerNumbersThrowExceptionForC(string romanNumeral)
+        {
+            Assert.Throws<ArgumentException>(() => RomanNumeralConverter.Convert(romanNumeral));
+        }
+
+        [Theory]
+        [InlineData("DM")]
+        public void DIsAlwaysIllegalLowerNumber(string romanNumeral)
+        {
+            Assert.Throws<ArgumentException>(() => RomanNumeralConverter.Convert(romanNumeral));
+        }
     }
 
 }
