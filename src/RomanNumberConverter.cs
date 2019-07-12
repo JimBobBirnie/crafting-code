@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace CraftingCode
@@ -26,6 +27,10 @@ namespace CraftingCode
                     isDeductionPair = currentCharacterValue < nextCharacterValue;
                     if (isDeductionPair)
                     {
+                        if (currentCharacterValue == 1 && (nextCharacterValue!= 5 && nextCharacterValue!=10))
+                        {
+                            throw new ArgumentException("romanNumeral");
+                        }
                         runningTotal += (nextCharacterValue - currentCharacterValue);
                         i++;
                     }
