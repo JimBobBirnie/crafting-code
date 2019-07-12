@@ -31,6 +31,10 @@ namespace CraftingCode
                         {
                             throw new ArgumentException("romanNumeral");
                         }
+                        if (currentCharacterValue == 5)
+                        {
+                            throw new ArgumentException("romanNumeral");                            
+                        }
                         runningTotal += (nextCharacterValue - currentCharacterValue);
                         i++;
                     }
