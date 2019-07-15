@@ -95,6 +95,15 @@ namespace CraftingCode
         {
             Assert.Throws<ArgumentException>(() => RomanNumeralConverter.Convert(romanNumeral));
         }
-    }
 
+        [Theory]
+        [InlineData("IIV")]
+        [InlineData("VIX")]
+        [InlineData("CCD")]
+        [InlineData("XIL")]
+        public void NumberBeforeDeductionPairMustBeGreaterThanOrEqualToBiggerNumber(string romanNumeral)
+        {
+            Assert.Throws<ArgumentException>(() => RomanNumeralConverter.Convert(romanNumeral));
+        }
+    }
 }

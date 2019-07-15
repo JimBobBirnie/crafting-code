@@ -21,6 +21,8 @@ namespace CraftingCode
             {'C', new List<char>{'D', 'M'}}
         };
 
+
+
         private static bool IsValidDeductionPair(char precedingCharacter, char succeedingCharacter)
         {
             return _allowedDeductionPairs.ContainsKey(precedingCharacter) &&
@@ -37,10 +39,20 @@ namespace CraftingCode
                     currentCharacterValue < (nextCharacterValue = _characterValues[romanNumeral[i + 1]]);
                 if (isDeductionPair)
                 {
+                    if (i > 0)
+                    {
+                        //check for previous character
+                        var previousCharacterValue = _characterValues[romanNumeral[i - 1]];
+                        if (previousCharacterValue < nextCharacterValue)
+                        {
+                            throw new ArgumentException("romanNumeral");
+                        }
+                    }
                     if (!IsValidDeductionPair(romanNumeral[i], romanNumeral[i + 1]))
                     {
                         throw new ArgumentException("romanNumeral");
                     }
+
                     runningTotal += (nextCharacterValue - currentCharacterValue);
                     i++;
                 }
