@@ -23,7 +23,7 @@ namespace CraftingCode
 
 
 
-        private static bool IsValidDeductionPair(Nullable<char> previousCharacter, char currentCharacter, char nextCharacter)
+        private static bool IsValidDeductionTriple(Nullable<char> previousCharacter, char currentCharacter, char nextCharacter)
         {
 
             return (!previousCharacter.HasValue || _characterValues[previousCharacter.Value] >=
@@ -41,27 +41,20 @@ namespace CraftingCode
                     currentCharacterValue < (nextCharacterValue = _characterValues[romanNumeral[i + 1]]);
                 if (isDeductionPair)
                 {
-                    Nullable<char> previousCharacter = i > 0 ? romanNumeral[i - 1] : (Nullable<char>)null;
-                 
-                    if (!IsValidDeductionPair(previousCharacter, romanNumeral[i], romanNumeral[i + 1]))
+                    var previousCharacter = i > 0 ? romanNumeral[i - 1] : (Nullable<char>)null;
+                    if (!IsValidDeductionTriple(previousCharacter, romanNumeral[i], romanNumeral[i + 1]))
                     {
                         throw new ArgumentException("romanNumeral");
                     }
-
                     runningTotal += (nextCharacterValue - currentCharacterValue);
                     i++;
                 }
                 else
                 {
-                    runningTotal += _characterValues[romanNumeral[i]];
+                    runningTotal += currentCharacterValue;
                 }
             }
             return runningTotal;
-        }
-
-        private static int GetCharacterEquivalent(char singleCharacter)
-        {
-            return _characterValues[singleCharacter];
         }
     }
 }
