@@ -23,10 +23,12 @@ namespace CraftingCode
 
 
 
-        private static bool IsValidDeductionPair(char precedingCharacter, char succeedingCharacter)
+        private static bool IsValidDeductionPair(Nullable<char> previousCharacter, char currentCharacter, char nextCharacter)
         {
-            return _allowedDeductionPairs.ContainsKey(precedingCharacter) &&
-                _allowedDeductionPairs[precedingCharacter].Contains(succeedingCharacter);
+
+            return (!previousCharacter.HasValue || _characterValues[previousCharacter.Value] >=
+                   _characterValues[nextCharacter]) && _allowedDeductionPairs.ContainsKey(currentCharacter) &&
+               _allowedDeductionPairs[currentCharacter].Contains(nextCharacter);
         }
         public static int Convert(string romanNumeral)
         {
@@ -39,16 +41,9 @@ namespace CraftingCode
                     currentCharacterValue < (nextCharacterValue = _characterValues[romanNumeral[i + 1]]);
                 if (isDeductionPair)
                 {
-                    if (i > 0)
-                    {
-                        //check for previous character
-                        var previousCharacterValue = _characterValues[romanNumeral[i - 1]];
-                        if (previousCharacterValue < nextCharacterValue)
-                        {
-                            throw new ArgumentException("romanNumeral");
-                        }
-                    }
-                    if (!IsValidDeductionPair(romanNumeral[i], romanNumeral[i + 1]))
+                    Nullable<char> previousCharacter = i > 0 ? romanNumeral[i - 1] : (Nullable<char>)null;
+                 
+                    if (!IsValidDeductionPair(previousCharacter, romanNumeral[i], romanNumeral[i + 1]))
                     {
                         throw new ArgumentException("romanNumeral");
                     }
