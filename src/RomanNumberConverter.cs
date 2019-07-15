@@ -14,38 +14,35 @@ namespace CraftingCode
             {'D', 500},
             {'M', 1000}
         };
+
+        private static Dictionary<char, List<char>> _allowedDeductionPairs = new Dictionary<char, List<char>>{
+            {'I', new List<char>{'V','X'}},
+            {'X', new List<char>{'L', 'C'}},
+            {'C', new List<char>{'D', 'M'}}
+        };
+
+        private static bool IsValidDeductionPair(char precedingCharacter, char succeedingCharacter)
+        {
+            return _allowedDeductionPairs.ContainsKey(precedingCharacter) &&
+                _allowedDeductionPairs[precedingCharacter].Contains(succeedingCharacter);
+        }
         public static int Convert(string romanNumeral)
         {
             var runningTotal = 0;
             for (int i = 0; i < romanNumeral.Length; i++)
             {
                 var currentCharacterValue = _characterValues[romanNumeral[i]];
-                bool isDeductionPair = false;
-                if (i < romanNumeral.Length - 1)
+                var nextCharacterValue = 0;
+                bool isDeductionPair = i < romanNumeral.Length - 1 &&
+                    currentCharacterValue < (nextCharacterValue = _characterValues[romanNumeral[i + 1]]);
+                if (isDeductionPair)
                 {
-                    var nextCharacterValue = _characterValues[romanNumeral[i + 1]];
-                    isDeductionPair = currentCharacterValue < nextCharacterValue;
-                    if (isDeductionPair)
+                    if (!IsValidDeductionPair(romanNumeral[i], romanNumeral[i + 1]))
                     {
-                        if (currentCharacterValue == 1 && (nextCharacterValue != 5 && nextCharacterValue != 10))
-                        {
-                            throw new ArgumentException("romanNumeral");
-                        }
-                        if (currentCharacterValue == 5 || currentCharacterValue == 50 || currentCharacterValue == 500)
-                        {
-                            throw new ArgumentException("romanNumeral");
-                        }
-                        if (currentCharacterValue == 10 && (nextCharacterValue != 50 && nextCharacterValue != 100))
-                        {
-                              throw new ArgumentException("romanNumeral");
-                        }
-                        runningTotal += (nextCharacterValue - currentCharacterValue);
-                        i++;
+                        throw new ArgumentException("romanNumeral");
                     }
-                    else
-                    {
-                        runningTotal += _characterValues[romanNumeral[i]];
-                    }
+                    runningTotal += (nextCharacterValue - currentCharacterValue);
+                    i++;
                 }
                 else
                 {
