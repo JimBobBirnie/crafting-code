@@ -24,5 +24,18 @@ namespace CraftingCode
         {
             Assert.Throws<ArgumentException>(() => RomanNumeralConverter.ConvertToRomanNumerals(4000));
         }
+
+        [Theory]
+        [InlineData(4, "IV")]
+        [InlineData(9, "IX")]
+        [InlineData(40, "XL")]
+        [InlineData(90, "XC")]
+        [InlineData(400, "CD")]
+        [InlineData(900, "CM")]
+        public void DeductionCharactersWorkCorrectly(int decimalNumber, string expectedRomanNueral)
+        {
+            var actual = RomanNumeralConverter.ConvertToRomanNumerals(decimalNumber);
+            Assert.Equal(expectedRomanNueral, actual);
+        }
     }
 }
