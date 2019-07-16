@@ -64,14 +64,22 @@ namespace CraftingCode
                 {
                     return new String('M', thousands) + ConvertToRomanNumerals(decimalNumber - 1000 * thousands);
                 }
-                if(decimalNumber / 900 == 1){
+                if (decimalNumber / 900 == 1)
+                {
                     return "CM" + ConvertToRomanNumerals(decimalNumber - 900);
                 }
-                if(decimalNumber / 500 == 1){
-                    return "D"+ ConvertToRomanNumerals(decimalNumber - 500);
+                if (decimalNumber / 500 == 1)
+                {
+                    return "D" + ConvertToRomanNumerals(decimalNumber - 500);
                 }
-                  if(decimalNumber / 400 == 1){
-                    return "CD"+ ConvertToRomanNumerals(decimalNumber - 400);
+                if (decimalNumber / 400 == 1)
+                {
+                    return "CD" + ConvertToRomanNumerals(decimalNumber - 400);
+                }
+                var hundreds = decimalNumber / 100;
+                if (hundreds > 0)
+                {
+                    return new String('C', hundreds) + ConvertToRomanNumerals(decimalNumber - 100 * hundreds);
                 }
                 return null;
             }
