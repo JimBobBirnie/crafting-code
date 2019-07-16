@@ -53,10 +53,6 @@ namespace CraftingCode
             {
                 throw new ArgumentException("decimalNumber");
             }
-            if (_romanEquivalents.ContainsKey(decimalNumber))
-            {
-                return _romanEquivalents[decimalNumber];
-            }
             else
             {
                 var thousands = decimalNumber / 1000;
@@ -98,9 +94,17 @@ namespace CraftingCode
                 {
                     return new String('X', tens) + ConvertToRomanNumerals(decimalNumber - 10 * tens);                    
                 }
+                if (decimalNumber / 9 == 1)
+                {
+                    return "IX";
+                }
                 if (decimalNumber / 5 == 1)
                 {
                     return "V" + ConvertToRomanNumerals(decimalNumber - 5);  
+                }
+                if (decimalNumber / 4 == 1)
+                {
+                    return "IV";
                 }
                 return new String('I', decimalNumber);
             }
