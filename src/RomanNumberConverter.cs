@@ -64,10 +64,8 @@ namespace CraftingCode
                 {
                     return new String('M', thousands) + ConvertToRomanNumerals(decimalNumber - 1000 * thousands);
                 }
-                var nineHundreds = decimalNumber / 900;
-                if(nineHundreds == 1){
+                if(decimalNumber / 900 == 1){
                     return "CM" + ConvertToRomanNumerals(decimalNumber - 900);
-                    
                 }
                 return null;
             }
