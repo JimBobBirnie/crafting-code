@@ -5,7 +5,7 @@ namespace CraftingCode
 {
     public class RomanNumeralConverter
     {
-        private static Dictionary<char, int> _decimalEquivalents = new Dictionary<char, int>{
+        private static readonly Dictionary<char, int> _decimalEquivalents = new Dictionary<char, int>{
             {'I', 1},
             {'V', 5},
             {'X', 10},
@@ -15,14 +15,20 @@ namespace CraftingCode
             {'M', 1000}
         };
 
-        private static Dictionary<int, char> _romanEquivalents = new Dictionary<int, char>{
-            { 1, 'I'},
-            { 5, 'V'},
-            { 10, 'X'},
-            { 50, 'L'},
-            { 100, 'C'},
-            { 500, 'D'},
-            { 1000, 'M'}
+        private static readonly Dictionary<int, string> _romanEquivalents = new Dictionary<int, string>{
+            { 1, "I"},
+            { 5, "V"},
+            { 10, "X"},
+            { 50, "L"},
+            { 100, "C"},
+            { 500, "D"},
+            { 1000, "M"},
+            { 4, "IV"},
+            { 9, "IX"},
+            { 40, "XL"},
+            { 90, "XC"},
+            { 400, "CD"},
+            { 900, "CM"}
         };
 
 
@@ -49,7 +55,7 @@ namespace CraftingCode
             {
                 throw new ArgumentException("decimalNumber");
             }
-            return _romanEquivalents[decimalNumber].ToString();
+            return _romanEquivalents[decimalNumber];
         }
 
         public static int ConvertToDecimal(string romanNumeral)
