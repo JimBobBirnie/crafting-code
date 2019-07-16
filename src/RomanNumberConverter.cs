@@ -32,13 +32,11 @@ namespace CraftingCode
         };
 
 
-        private static Dictionary<char, List<char>> _allowedDeductionPairs = new Dictionary<char, List<char>>{
+        private static readonly Dictionary<char, List<char>> _allowedDeductionPairs = new Dictionary<char, List<char>>{
             {'I', new List<char>{'V','X'}},
             {'X', new List<char>{'L', 'C'}},
             {'C', new List<char>{'D', 'M'}}
         };
-
-
 
         private static bool IsValidDeductionTriple(Nullable<char> previousCharacter, char currentCharacter, char nextCharacter)
         {
@@ -55,7 +53,14 @@ namespace CraftingCode
             {
                 throw new ArgumentException("decimalNumber");
             }
-            return _romanEquivalents[decimalNumber];
+            if (_romanEquivalents.ContainsKey(decimalNumber))
+            {
+                return _romanEquivalents[decimalNumber];
+            }
+            else
+            {
+                return null;
+            }
         }
 
         public static int ConvertToDecimal(string romanNumeral)

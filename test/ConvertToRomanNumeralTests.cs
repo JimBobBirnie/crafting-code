@@ -32,10 +32,19 @@ namespace CraftingCode
         [InlineData(90, "XC")]
         [InlineData(400, "CD")]
         [InlineData(900, "CM")]
-        public void DeductionCharactersWorkCorrectly(int decimalNumber, string expectedRomanNueral)
+        public void DeductionCharactersWorkCorrectly(int decimalNumber, string expectedRomanNumeral)
         {
             var actual = RomanNumeralConverter.ConvertToRomanNumerals(decimalNumber);
-            Assert.Equal(expectedRomanNueral, actual);
+            Assert.Equal(expectedRomanNumeral, actual);
+        }
+
+        [Theory]
+        [InlineData(2, "II")]
+        [InlineData(3, "III")]
+        public void LeftToRightCases(int decimalNumber, string expectedRomanNumeral)
+        {
+            var actual = RomanNumeralConverter.ConvertToRomanNumerals(decimalNumber);
+            Assert.Equal(expectedRomanNumeral, actual);
         }
     }
 }
