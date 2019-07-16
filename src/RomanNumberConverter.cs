@@ -15,20 +15,21 @@ namespace CraftingCode
             {'M', 1000}
         };
 
-        private static readonly Dictionary<int, string> _romanEquivalents = new Dictionary<int, string>{
-            { 1, "I"},
-            { 5, "V"},
-            { 10, "X"},
-            { 50, "L"},
-            { 100, "C"},
-            { 500, "D"},
+        private static readonly Dictionary<int, string> _orderedRomanEquivalents = new Dictionary<int, string>{
+
             { 1000, "M"},
-            { 4, "IV"},
-            { 9, "IX"},
-            { 40, "XL"},
-            { 90, "XC"},
+            { 900, "CM"},
+            { 500, "D"},
             { 400, "CD"},
-            { 900, "CM"}
+            { 100, "C"},
+            { 90, "XC"},
+            { 50, "L"},
+            { 40, "XL"},
+            { 10, "X"},
+            { 9, "IX"},
+            { 5, "V"},
+            { 4, "IV"},
+            { 1, "I"}
         };
 
 
@@ -55,58 +56,20 @@ namespace CraftingCode
             }
             else
             {
-                var thousands = decimalNumber / 1000;
-                if (thousands > 0)
+                foreach (KeyValuePair<int, string> conversionPair in _orderedRomanEquivalents)
                 {
-                    return new String('M', thousands) + ConvertToRomanNumerals(decimalNumber - 1000 * thousands);
+                    var units = decimalNumber / conversionPair.Key;
+                    if (units > 0)
+                    {
+                        if (conversionPair.Value.Length == 1)
+                        {
+                            return new String(conversionPair.Value[0], units) +
+                                ConvertToRomanNumerals(decimalNumber - conversionPair.Key * units);
+                        }
+                        else return conversionPair.Value + ConvertToRomanNumerals(decimalNumber - conversionPair.Key * units);
+                    }
                 }
-                if (decimalNumber / 900 == 1)
-                {
-                    return "CM" + ConvertToRomanNumerals(decimalNumber - 900);
-                }
-                if (decimalNumber / 500 == 1)
-                {
-                    return "D" + ConvertToRomanNumerals(decimalNumber - 500);
-                }
-                if (decimalNumber / 400 == 1)
-                {
-                    return "CD" + ConvertToRomanNumerals(decimalNumber - 400);
-                }
-                var hundreds = decimalNumber / 100;
-                if (hundreds > 0)
-                {
-                    return new String('C', hundreds) + ConvertToRomanNumerals(decimalNumber - 100 * hundreds);
-                }
-                if (decimalNumber / 90 == 1)
-                {
-                    return "XC" + ConvertToRomanNumerals(decimalNumber - 90);                    
-                }
-                if (decimalNumber / 50 == 1)
-                {
-                    return "L" + ConvertToRomanNumerals(decimalNumber - 50);                    
-                }
-                if (decimalNumber / 40 == 1)
-                {
-                    return "XL" + ConvertToRomanNumerals(decimalNumber - 40);                    
-                }
-                var tens = decimalNumber /10;
-                if (tens > 0)
-                {
-                    return new String('X', tens) + ConvertToRomanNumerals(decimalNumber - 10 * tens);                    
-                }
-                if (decimalNumber / 9 == 1)
-                {
-                    return "IX";
-                }
-                if (decimalNumber / 5 == 1)
-                {
-                    return "V" + ConvertToRomanNumerals(decimalNumber - 5);  
-                }
-                if (decimalNumber / 4 == 1)
-                {
-                    return "IV";
-                }
-                return new String('I', decimalNumber);
+                return null;
             }
         }
 
