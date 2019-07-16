@@ -57,5 +57,14 @@ namespace CraftingCode
             var actual = RomanNumeralConverter.ConvertToRomanNumerals(decimalNumber);
             Assert.Equal(expectedRomanNumeral, actual);
         }
+
+        [Theory]
+        [InlineData(2499, "MMCDXCIX")]
+        [InlineData(3949, "MMMCMXLIX")]
+        public void SpecifiedCasesInProblemStatement(int decimalNumber, string expectedRomanNumeral)
+        {
+            var actual = RomanNumeralConverter.ConvertToRomanNumerals(decimalNumber);
+            Assert.Equal(expectedRomanNumeral, actual);
+        }
     }
 }
