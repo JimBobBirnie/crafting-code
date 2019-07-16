@@ -18,5 +18,11 @@ namespace CraftingCode
             var actual = RomanNumeralConverter.ConvertToRomanNumerals(decimalNumber);
             Assert.Equal(expectedRomanNueral, actual);
         }
+
+        [Fact]
+        public void ThrowIfDecimalExceedsMaximum()
+        {
+            Assert.Throws<ArgumentException>(() => RomanNumeralConverter.ConvertToRomanNumerals(4000));
+        }
     }
 }
