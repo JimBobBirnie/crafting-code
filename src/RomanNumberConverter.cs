@@ -15,7 +15,7 @@ namespace CraftingCode
             {'M', 1000}
         };
 
-         private static Dictionary<int, char> _romanEquivalents = new Dictionary<int, char>{
+        private static Dictionary<int, char> _romanEquivalents = new Dictionary<int, char>{
             { 1, 'I'},
             { 5, 'V'},
             { 10, 'X'},
@@ -25,10 +25,6 @@ namespace CraftingCode
             { 1000, 'M'}
         };
 
-        public static string ConvertToRomanNumerals(int decimalNumber)
-        {
-            return _romanEquivalents[decimalNumber].ToString();
-        }
 
         private static Dictionary<char, List<char>> _allowedDeductionPairs = new Dictionary<char, List<char>>{
             {'I', new List<char>{'V','X'}},
@@ -45,6 +41,17 @@ namespace CraftingCode
                    _decimalEquivalents[nextCharacter]) && _allowedDeductionPairs.ContainsKey(currentCharacter) &&
                _allowedDeductionPairs[currentCharacter].Contains(nextCharacter);
         }
+
+
+        public static string ConvertToRomanNumerals(int decimalNumber)
+        {
+            if (decimalNumber >= 4000)
+            {
+                throw new ArgumentException("decimalNumber");
+            }
+            return _romanEquivalents[decimalNumber].ToString();
+        }
+
         public static int ConvertToDecimal(string romanNumeral)
         {
             var runningTotal = 0;
