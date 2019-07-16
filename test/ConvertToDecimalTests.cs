@@ -3,7 +3,7 @@ using Xunit;
 
 namespace CraftingCode
 {
-    public class RomanNumeralConverterTests
+    public class ConvertToDecimalTests
     {
         [Theory]
         [InlineData("I", 1)]
@@ -15,7 +15,7 @@ namespace CraftingCode
         [InlineData("M", 1000)]
         public void SingleCharacterTests(string romanNumeral, int decimalEquivalent)
         {
-            var actual = RomanNumeralConverter.Convert(romanNumeral);
+            var actual = RomanNumeralConverter.ConvertToDecimal(romanNumeral);
             Assert.Equal(decimalEquivalent, actual);
         }
 
@@ -27,7 +27,7 @@ namespace CraftingCode
         [InlineData("MMC", 2100)]
         public void MultipleCharacterTests(string romanNumeral, int decimalEquivalent)
         {
-            var actual = RomanNumeralConverter.Convert(romanNumeral);
+            var actual = RomanNumeralConverter.ConvertToDecimal(romanNumeral);
             Assert.Equal(decimalEquivalent, actual);
         }
 
@@ -39,7 +39,7 @@ namespace CraftingCode
         [InlineData("CM", 900)]
         public void SmallerNumberDeductsFromSubsequentLargerNumber(string romanNumeral, int decimalEquivalent)
         {
-            var actual = RomanNumeralConverter.Convert(romanNumeral);
+            var actual = RomanNumeralConverter.ConvertToDecimal(romanNumeral);
             Assert.Equal(decimalEquivalent, actual);
         }
 
@@ -48,7 +48,7 @@ namespace CraftingCode
         [InlineData("MMMCMXLIX", 3949)]
         public void TheComplexCases(string romanNumeral, int decimalEquivalent)
         {
-            var actual = RomanNumeralConverter.Convert(romanNumeral);
+            var actual = RomanNumeralConverter.ConvertToDecimal(romanNumeral);
             Assert.Equal(decimalEquivalent, actual);
         }
         [Theory]
@@ -58,7 +58,7 @@ namespace CraftingCode
         [InlineData("IM")]
         public void IllegalLowerNumbersThrowExceptionForI(string romanNumeral)
         {
-            Assert.Throws<ArgumentException>(() => RomanNumeralConverter.Convert(romanNumeral));
+            Assert.Throws<ArgumentException>(() => RomanNumeralConverter.ConvertToDecimal(romanNumeral));
         }
 
         [Theory]
@@ -69,7 +69,7 @@ namespace CraftingCode
         [InlineData("VVMD")]
         public void VIsAlwaysAnIllegalLowerNumber(string romanNumeral)
         {
-            Assert.Throws<ArgumentException>(() => RomanNumeralConverter.Convert(romanNumeral));
+            Assert.Throws<ArgumentException>(() => RomanNumeralConverter.ConvertToDecimal(romanNumeral));
         }
 
         [Theory]
@@ -77,7 +77,7 @@ namespace CraftingCode
         [InlineData("XM")]
         public void IllegalLowerNumbersThrowExceptionForX(string romanNumeral)
         {
-            Assert.Throws<ArgumentException>(() => RomanNumeralConverter.Convert(romanNumeral));
+            Assert.Throws<ArgumentException>(() => RomanNumeralConverter.ConvertToDecimal(romanNumeral));
         }
 
         [Theory]
@@ -86,14 +86,14 @@ namespace CraftingCode
         [InlineData("LM")]
         public void LIsAlwaysIllegalLowerNumber(string romanNumeral)
         {
-            Assert.Throws<ArgumentException>(() => RomanNumeralConverter.Convert(romanNumeral));
+            Assert.Throws<ArgumentException>(() => RomanNumeralConverter.ConvertToDecimal(romanNumeral));
         }
 
         [Theory]
         [InlineData("DM")]
         public void DIsAlwaysIllegalLowerNumber(string romanNumeral)
         {
-            Assert.Throws<ArgumentException>(() => RomanNumeralConverter.Convert(romanNumeral));
+            Assert.Throws<ArgumentException>(() => RomanNumeralConverter.ConvertToDecimal(romanNumeral));
         }
 
         [Theory]
@@ -103,7 +103,7 @@ namespace CraftingCode
         [InlineData("XIL")]
         public void NumberBeforeDeductionPairMustBeGreaterThanOrEqualToBiggerNumber(string romanNumeral)
         {
-            Assert.Throws<ArgumentException>(() => RomanNumeralConverter.Convert(romanNumeral));
+            Assert.Throws<ArgumentException>(() => RomanNumeralConverter.ConvertToDecimal(romanNumeral));
         }
     }
 }

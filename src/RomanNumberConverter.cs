@@ -30,7 +30,7 @@ namespace CraftingCode
                    _characterValues[nextCharacter]) && _allowedDeductionPairs.ContainsKey(currentCharacter) &&
                _allowedDeductionPairs[currentCharacter].Contains(nextCharacter);
         }
-        public static int Convert(string romanNumeral)
+        public static int ConvertToDecimal(string romanNumeral)
         {
             var runningTotal = 0;
             for (int i = 0; i < romanNumeral.Length; i++)
