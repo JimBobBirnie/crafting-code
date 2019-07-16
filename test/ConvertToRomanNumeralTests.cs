@@ -43,6 +43,8 @@ namespace CraftingCode
         [InlineData(901, "CMI")]
         [InlineData(910, "CMX")]
         [InlineData(550, "DL")]
+        [InlineData(410, "CDX")]
+        [InlineData(301, "CCCI")]
         public void LeftToRightCases(int decimalNumber, string expectedRomanNumeral)
         {
             var actual = RomanNumeralConverter.ConvertToRomanNumerals(decimalNumber);
