@@ -70,6 +70,9 @@ namespace CraftingCode
                 if(decimalNumber / 500 == 1){
                     return "D"+ ConvertToRomanNumerals(decimalNumber - 500);
                 }
+                  if(decimalNumber / 400 == 1){
+                    return "CD"+ ConvertToRomanNumerals(decimalNumber - 400);
+                }
                 return null;
             }
         }
