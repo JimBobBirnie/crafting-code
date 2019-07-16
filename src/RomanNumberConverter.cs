@@ -98,7 +98,11 @@ namespace CraftingCode
                 {
                     return new String('X', tens) + ConvertToRomanNumerals(decimalNumber - 10 * tens);                    
                 }
-                return null;
+                if (decimalNumber / 5 == 1)
+                {
+                    return "V" + ConvertToRomanNumerals(decimalNumber - 5);  
+                }
+                return new String('I', decimalNumber);
             }
         }
 
