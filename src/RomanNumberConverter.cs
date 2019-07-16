@@ -81,6 +81,23 @@ namespace CraftingCode
                 {
                     return new String('C', hundreds) + ConvertToRomanNumerals(decimalNumber - 100 * hundreds);
                 }
+                if (decimalNumber / 90 == 1)
+                {
+                    return "XC" + ConvertToRomanNumerals(decimalNumber - 90);                    
+                }
+                if (decimalNumber / 50 == 1)
+                {
+                    return "L" + ConvertToRomanNumerals(decimalNumber - 50);                    
+                }
+                if (decimalNumber / 40 == 1)
+                {
+                    return "XL" + ConvertToRomanNumerals(decimalNumber - 40);                    
+                }
+                var tens = decimalNumber /10;
+                if (tens > 0)
+                {
+                    return new String('X', tens) + ConvertToRomanNumerals(decimalNumber - 10 * tens);                    
+                }
                 return null;
             }
         }
