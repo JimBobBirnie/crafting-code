@@ -39,8 +39,7 @@ namespace CraftingCode
         }
 
         [Theory]
-        [InlineData(2, "II")]
-        [InlineData(3, "III")]
+        [InlineData(30001, "MMMI")]
         public void LeftToRightCases(int decimalNumber, string expectedRomanNumeral)
         {
             var actual = RomanNumeralConverter.ConvertToRomanNumerals(decimalNumber);
