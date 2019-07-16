@@ -67,6 +67,9 @@ namespace CraftingCode
                 if(decimalNumber / 900 == 1){
                     return "CM" + ConvertToRomanNumerals(decimalNumber - 900);
                 }
+                if(decimalNumber / 500 == 1){
+                    return "D"+ ConvertToRomanNumerals(decimalNumber - 500);
+                }
                 return null;
             }
         }

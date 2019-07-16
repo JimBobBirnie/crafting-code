@@ -39,8 +39,10 @@ namespace CraftingCode
         }
 
         [Theory]
-       [InlineData(3001, "MMMI")]
-       [InlineData(901, "CMI")]
+        [InlineData(3001, "MMMI")]
+        [InlineData(901, "CMI")]
+        [InlineData(910, "CMX")]
+        [InlineData(550, "DL")]
         public void LeftToRightCases(int decimalNumber, string expectedRomanNumeral)
         {
             var actual = RomanNumeralConverter.ConvertToRomanNumerals(decimalNumber);
