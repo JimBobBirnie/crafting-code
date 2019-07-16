@@ -59,6 +59,11 @@ namespace CraftingCode
             }
             else
             {
+                var thousands = decimalNumber / 1000;
+                if (thousands > 0)
+                {
+                    return new String('M', thousands) + ConvertToRomanNumerals(decimalNumber - 1000 * thousands);
+                }
                 return null;
             }
         }
