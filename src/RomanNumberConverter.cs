@@ -43,8 +43,8 @@ namespace CraftingCode
         {
 
             return (!previousCharacter.HasValue || _decimalEquivalents[previousCharacter.Value] >=
-                   _decimalEquivalents[nextCharacter]) && _allowedDeductionPairs.ContainsKey(currentCharacter) &&
-               _allowedDeductionPairs[currentCharacter].Contains(nextCharacter);
+                _decimalEquivalents[nextCharacter]) && _allowedDeductionPairs.ContainsKey(currentCharacter) &&
+                _allowedDeductionPairs[currentCharacter].Contains(nextCharacter);
         }
 
 
@@ -54,23 +54,20 @@ namespace CraftingCode
             {
                 throw new ArgumentException("decimalNumber");
             }
-            else
+            foreach (KeyValuePair<int, string> conversionPair in _orderedRomanEquivalents)
             {
-                foreach (KeyValuePair<int, string> conversionPair in _orderedRomanEquivalents)
+                var units = decimalNumber / conversionPair.Key;
+                if (units > 0)
                 {
-                    var units = decimalNumber / conversionPair.Key;
-                    if (units > 0)
+                    if (conversionPair.Value.Length == 1)
                     {
-                        if (conversionPair.Value.Length == 1)
-                        {
-                            return new String(conversionPair.Value[0], units) +
-                                ConvertToRomanNumerals(decimalNumber - conversionPair.Key * units);
-                        }
-                        else return conversionPair.Value + ConvertToRomanNumerals(decimalNumber - conversionPair.Key * units);
+                        return new String(conversionPair.Value[0], units) +
+                            ConvertToRomanNumerals(decimalNumber - conversionPair.Key * units);
                     }
+                    else return conversionPair.Value + ConvertToRomanNumerals(decimalNumber - conversionPair.Key * units);
                 }
-                return null;
             }
+            return string.Empty;
         }
 
         public static int ConvertToDecimal(string romanNumeral)
